@@ -18,10 +18,6 @@
 - name: Install Docker's dependencies
   apt:
     name: "{{ docker__package_dependencies + docker__pip_dependencies }}"
-    # the following is suggested by the following issues:
-    # https://github.com/raspberrypi/linux/issues/3021#issuecomment-508576023
-    # https://github.com/docker/for-linux/issues/709
-    install_recommends: no
 
 - name: Add Docker's public GPG key to the APT keyring
   apt_key:
@@ -37,6 +33,10 @@
   apt:
     name: "docker-{{ docker__edition }}"
     state: "{{ docker__state }}"
+    # the following is suggested by the following issues:
+    # https://github.com/raspberrypi/linux/issues/3021#issuecomment-508576023
+    # https://github.com/docker/for-linux/issues/709
+    install_recommends: no
 
 - name: Install Virtualenv
   pip:
